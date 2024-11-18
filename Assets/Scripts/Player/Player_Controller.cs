@@ -35,8 +35,8 @@ public class Player_Controller : MonoBehaviour
     void Update()
     {
         x_input = Input.GetAxis("Horizontal");
-        press_jump = Input.GetKeyDown(KeyCode.UpArrow);
         pressing_jump = Input.GetKey(KeyCode.UpArrow);
+        if (Input.GetKeyDown(KeyCode.UpArrow)) press_jump = true;
     }
 
     void FixedUpdate()
@@ -65,6 +65,7 @@ public class Player_Controller : MonoBehaviour
         // Si le joueur vient juste d'appuyer sur la touche saut
         if (press_jump)
         {
+            press_jump = false;
             jbuffer_timer = jbuffer_length;
         }
 
