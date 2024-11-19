@@ -7,13 +7,13 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager instance;
     public byte difficulty;
     public float sfxVolume;
     public float bgmVolume;
     public Slider sfx;
     public Slider bgm;
     public TMP_Text diff;
-
     public void sfxOption()
     {
         sfxVolume = sfx.value;
@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     {
         bgmVolume = bgm.value;
     }
+    //gère a difficulté ; cycle au travers Facile, Normale, Difficile
     public void difficultyOption()
     {
         if (difficulty == 2)
@@ -40,8 +41,10 @@ public class GameManager : MonoBehaviour
             diff.SetText("Difficulté : Difficile");
         }
     }
-    public void Start()
+    private void Awake()
     {
-        difficulty = 1;
+        // Fait en sorte que le GameManager soit persistent au travers les scènes
+        instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 }

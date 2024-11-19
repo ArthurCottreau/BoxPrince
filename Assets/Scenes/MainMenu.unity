@@ -3564,6 +3564,8 @@ MonoBehaviour:
   mainMenu: {fileID: 354416750}
   leaderboard: {fileID: 1538192752}
   options: {fileID: 946923201}
+  gameManager: {fileID: 1724476490}
+  sceneName: Game
 --- !u!4 &1316116471
 Transform:
   m_ObjectHideFlags: 0
@@ -5553,9 +5555,9 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 961736506}
-  - {fileID: 1316116471}
+  - {fileID: 58723576}
   - {fileID: 1724476492}
+  - {fileID: 1316116471}
   - {fileID: 354416754}
   - {fileID: 1538192756}
   - {fileID: 946923205}
-  - {fileID: 58723576}
