@@ -23,8 +23,8 @@ public class Player_Controller : MonoBehaviour
 
     // Variables liées aux contrôles
     private float x_input;
-    private bool press_jump;
-    private bool pressing_jump;
+    private bool press_jump = false;
+    private bool pressing_jump = false;
 
     void Start()
     {
@@ -70,7 +70,7 @@ public class Player_Controller : MonoBehaviour
         }
 
         // Vérifie si le joueur peut sauter
-        if(jbuffer_timer >= 0)
+        if(jbuffer_timer > 0)
         {
             jbuffer_timer -= Time.deltaTime;
 
