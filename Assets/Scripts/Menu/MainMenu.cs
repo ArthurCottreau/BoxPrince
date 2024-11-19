@@ -8,6 +8,8 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject mainMenu;
     [SerializeField] private GameObject leaderboard;
     [SerializeField] private GameObject options;
+    [SerializeField] private GameObject gameManager;
+    [SerializeField] private string sceneName;
     public void Awake()
     {
         mainMenu.SetActive(true);
@@ -16,7 +18,7 @@ public class MainMenu : MonoBehaviour
     }
     public void StartGame()
     {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene(sceneName);
     }
     public void QuitGame()
     {
