@@ -26,11 +26,6 @@ public class Inventory_Manager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            fill.color = Color.gray;
-            timeSpeed = speedMultiplier;
-        }
         if (currentTime >= maxTime)
         {
             NewBlock();
@@ -43,5 +38,11 @@ public class Inventory_Manager : MonoBehaviour
             currentTime += (1 * Time.deltaTime * timeSpeed);
         }
         fill.fillAmount = currentTime / maxTime;
+    }
+
+    public void multiply_speed()
+    {
+        fill.color = Color.gray;
+        timeSpeed = speedMultiplier;
     }
 }
