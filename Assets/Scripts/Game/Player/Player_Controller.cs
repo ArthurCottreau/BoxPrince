@@ -20,9 +20,10 @@ public class Player_Controller : MonoBehaviour
     private float jump_timer = 0;
     private float coyote_timer = 0;
     private float jbuffer_timer = 0;
+    private float speed_multi;   // Multiplicateur de vitesse pour quand le personnage saute
 
     // Variables liées aux contrôles
-    private float x_input;
+    private int direction = 1;
     private bool press_jump = false;
     private bool pressing_jump = false;
 
@@ -34,9 +35,8 @@ public class Player_Controller : MonoBehaviour
 
     void Update()
     {
-        x_input = Input.GetAxis("Horizontal");
-        pressing_jump = Input.GetKey(KeyCode.UpArrow);
-        if (Input.GetKeyDown(KeyCode.UpArrow)) press_jump = true;
+        pressing_jump = Input.GetKey(KeyCode.Space);
+        if (Input.GetKeyDown(KeyCode.Space)) press_jump = true;
     }
 
     void FixedUpdate()
@@ -47,7 +47,18 @@ public class Player_Controller : MonoBehaviour
 
     private void handle_movement()
     {
-        player_rb.velocity = new Vector2(x_input * speed, player_rb.velocity.y);
+        // Test la direction du joueur
+        if (is_Touching(Vector2.right))
+        {
+            direction = -1;
+        }
+
+        if (is_Touching(Vector2.left))
+        {
+            direction = 1;
+        }
+
+        player_rb.velocity = new Vector2(direction * (speed * speed_multi), player_rb.velocity.y);
     }
 
     private void handle_jump()
@@ -55,6 +66,7 @@ public class Player_Controller : MonoBehaviour
         // Si le joueur touche le sol
         if (is_Touching(Vector2.down))
         {
+            speed_multi = 1;
             coyote_timer = coyote_lenght;
         }
         else
@@ -78,6 +90,7 @@ public class Player_Controller : MonoBehaviour
             {
                 is_jumping = true;
                 jump_timer = jump_length;
+                speed_multi = 1.65f;
                 coyote_timer = 0; 
             }
         }
@@ -97,6 +110,7 @@ public class Player_Controller : MonoBehaviour
             {
                 is_jumping = false;
                 jump_timer = 0;
+                speed_multi = 1;
             }
         }
     }
