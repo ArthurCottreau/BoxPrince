@@ -9,14 +9,16 @@ public class Build_Manager : MonoBehaviour
     [SerializeField] private Color col_unbuild;
 
     private SpriteRenderer sprite_rend;
-    private Inventory_Manager inv_manag;
+    private UIManager ui_manag;
+    private InventoryManager inv_manag;
     private List<GameObject> trig_list = new List<GameObject>();
     private bool can_build = true;
 
     private void Start()
     {
         sprite_rend = gameObject.GetComponent<SpriteRenderer>();
-        inv_manag = gameObject.GetComponent<Inventory_Manager>();
+        inv_manag = gameObject.GetComponent<InventoryManager>();
+        ui_manag = gameObject.GetComponent<UIManager>();
     }
 
     void Update()
@@ -26,7 +28,6 @@ public class Build_Manager : MonoBehaviour
         if (can_build && Input.GetMouseButtonDown(0))
         {
             Instantiate(select_obj, pos, Quaternion.identity, level_layer);
-            inv_manag.multiply_speed();
         }
     }
 
