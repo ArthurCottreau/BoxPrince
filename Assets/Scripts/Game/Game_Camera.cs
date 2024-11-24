@@ -6,6 +6,8 @@ public class Player_Camera : MonoBehaviour
 {
     [SerializeField] Transform target;
     [SerializeField] float speed;
+    [SerializeField] private GameObject wallLeft;
+    [SerializeField] private GameObject wallRight;
 
     private void FixedUpdate()
     {
@@ -13,6 +15,9 @@ public class Player_Camera : MonoBehaviour
         {
             Vector3 newpos = new Vector3(0, target.position.y, -10);
             gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, newpos, speed);
+
+            wallLeft.transform.position = new Vector3(-14.75f, newpos.y, 0);
+            wallRight.transform.position = new Vector3(14.75f, newpos.y, 0);
         }
     }
 }
