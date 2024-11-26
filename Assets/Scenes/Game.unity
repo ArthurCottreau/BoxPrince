@@ -1042,10 +1042,6 @@ MonoBehaviour:
   maxTime: 6
   speedMultiplier: 2.5
   fill: {fileID: 2122328369}
-  activeSlot: {fileID: 919776501}
-  invSlot1: {fileID: 1360789676}
-  invSlot2: {fileID: 223435343}
-  invSlot3: {fileID: 757725113}
   inv_slots:
   - {fileID: 919776501}
   - {fileID: 1360789676}
@@ -3033,7 +3029,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1687196771
 MonoBehaviour:
   m_ObjectHideFlags: 0
