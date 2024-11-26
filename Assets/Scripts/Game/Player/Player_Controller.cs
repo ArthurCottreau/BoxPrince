@@ -9,11 +9,12 @@ public class Player_Controller : MonoBehaviour
     [SerializeField] private float jump_length; // Durée du saut
     [SerializeField] private float jbuffer_length;  // Durée avant d'avoir touché le sol, où le saut est toujours considéré valide
     [SerializeField] private float coyote_lenght;   // Durée du coyote time
+    [SerializeField] private LayerMask layermask;
 
     // Variables qui récupèrent des éléments externes
     private Rigidbody2D player_rb;
     private BoxCollider2D player_coll;
-    [SerializeField] private LayerMask layermask;
+    private ItemController last_touched;
 
     // Variables qui servent à gérer le saut
     private bool is_jumping = false;
@@ -118,6 +119,24 @@ public class Player_Controller : MonoBehaviour
     private bool is_Touching(Vector2 direction)
     {
         RaycastHit2D raycast = Physics2D.BoxCast(player_coll.bounds.center, player_coll.bounds.size, 0f, direction, 0.05f, layermask);
+
+        if (raycast)
+        {
+            ItemController itemController;
+            if (raycast.transform.TryGetComponent<ItemController>(out itemController))
+            {
+                if (last_touched != itemController)
+                {
+                    itemController.OnCollision();
+                    last_touched = itemController;
+                }
+            }
+            else
+            {
+                last_touched = null;
+            }
+        }
+
         return raycast.collider != null;
     }
 }
