@@ -14,6 +14,7 @@ public class Player_Controller : MonoBehaviour
     private Rigidbody2D player_rb;
     private BoxCollider2D player_coll;
     [SerializeField] private LayerMask layermask;
+    ItemController last_touched;
 
     // Variables qui servent à gérer le saut
     private bool is_jumping = false;
@@ -51,11 +52,14 @@ public class Player_Controller : MonoBehaviour
         if (is_Touching(Vector2.right))
         {
             direction = -1;
+            GetComponent<SpriteRenderer>().color = Color.yellow;
+
         }
 
         if (is_Touching(Vector2.left))
         {
             direction = 1;
+            GetComponent<SpriteRenderer>().color = Color.red;
         }
 
         player_rb.velocity = new Vector2(direction * (speed * speed_multi), player_rb.velocity.y);
@@ -118,6 +122,24 @@ public class Player_Controller : MonoBehaviour
     private bool is_Touching(Vector2 direction)
     {
         RaycastHit2D raycast = Physics2D.BoxCast(player_coll.bounds.center, player_coll.bounds.size, 0f, direction, 0.05f, layermask);
+
+        if (raycast)
+        {
+            ItemController itemController;
+            if (raycast.transform.TryGetComponent<ItemController>(out itemController))
+            {
+                if (last_touched != itemController)
+                {
+                    itemController.OnCollision();
+                    last_touched = itemController;
+                }
+            }
+            else
+            {
+                last_touched = null;
+            }
+        }
+
         return raycast.collider != null;
     }
 }

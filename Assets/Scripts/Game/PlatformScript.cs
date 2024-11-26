@@ -11,7 +11,7 @@ public class PlatformScript : ScriptableObject
     public Sprite icon;
     public GameObject prefab;
 
-    //public float decayTime; //Temps d'errosion du block
-    //public float decayCollision; //Temps soustrait à l'errosion du block quand entre en contact avec joueur
-    //public float decayMultiplier; //Multiplicateur à la vitesse d'errosion quand block est en contact avec joueur
+    public float decayTime = 10f; //Temps d'errosion du block
+    public float decayCollision = 1f; //Temps soustrait à l'errosion du block quand entre en contact avec joueur
+    public float decayMultiplier = 2f; //Multiplicateur à la vitesse d'errosion quand block est en contact avec joueur
 }
