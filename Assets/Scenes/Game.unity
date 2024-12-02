@@ -174,7 +174,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5166818743658223326, guid: 2c3e50b1dc05098419f661cfe264516d, type: 3}
       propertyPath: m_CompositePaths.m_Paths.Array.data[0].Array.size
-      value: 22
+      value: 33
       objectReference: {fileID: 0}
     - target: {fileID: 5166818743658223326, guid: 2c3e50b1dc05098419f661cfe264516d, type: 3}
       propertyPath: m_CompositePaths.m_Paths.Array.data[0].Array.data[0].x
@@ -214,7 +214,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5166818743658223326, guid: 2c3e50b1dc05098419f661cfe264516d, type: 3}
       propertyPath: m_ColliderPaths.Array.data[0].m_ColliderPaths.Array.data[0].Array.size
-      value: 22
+      value: 33
       objectReference: {fileID: 0}
     - target: {fileID: 5166818743658223326, guid: 2c3e50b1dc05098419f661cfe264516d, type: 3}
       propertyPath: m_ColliderPaths.Array.data[0].m_ColliderPaths.Array.data[0].Array.data[0].X
@@ -1187,6 +1187,8 @@ MonoBehaviour:
   platformsList:
   - {fileID: 11400000, guid: db53cee3ddb0f1b48944317ac315d4c5, type: 2}
   - {fileID: 11400000, guid: 1ecb27cb45269ac4c8cf3373d2692445, type: 2}
+  - {fileID: 11400000, guid: 5c37848726293f841b5ea3b1563a92dd, type: 2}
+  - {fileID: 11400000, guid: d299720479c83f84c9b3f00b4eb3aea4, type: 2}
   inventory: []
 --- !u!1 &683994289
 GameObject:
@@ -2204,12 +2206,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 3
   jump_force: 8
-  jump_length: 200
+  jump_length: 0.2
   jbuffer_length: 0.1
   coyote_lenght: 0.15
   layermask:
     serializedVersion: 2
     m_Bits: 8
+  canJump: 1
+  canMove: 1
+  isDead: 0
 --- !u!1 &919776499
 GameObject:
   m_ObjectHideFlags: 0
@@ -2343,7 +2348,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c376d9b0245ac0c429615d68ab6e89ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chuck_piece: {fileID: 5791567947570166660, guid: c1c459db9923bb740b33f4d8226620d7, type: 3}
   ch_l: {fileID: 11400000, guid: 406be88f27fa9ea40becc7b968bebc47, type: 2}
 --- !u!1 &1360789674
 GameObject:

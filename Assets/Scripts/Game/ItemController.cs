@@ -29,6 +29,7 @@ public class ItemController : MonoBehaviour
 
     private void handle_TimeLeft()
     {
+        // Détruit la platform le compte a rebourd decaytime atteint 0
         decaytime -= Time.deltaTime * decayMultiplier;
 
         if (decaytime < 0)
@@ -39,6 +40,7 @@ public class ItemController : MonoBehaviour
 
     private void handle_Decay()
     {
+        // Gère l'effet de decay du block
         progress = decaytime * (255 / Item.decayTime);
         float prog_a = progress / 255;
 

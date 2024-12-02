@@ -28,6 +28,11 @@ public class Player_Controller : MonoBehaviour
     private bool press_jump = false;
     private bool pressing_jump = false;
 
+    // booléens permettant de contrôller le déplacement, le saut, et la mort
+    public bool canJump = true;
+    public bool canMove = true;
+    public bool isDead = false;
+
     void Start()
     {
         player_rb = GetComponent<Rigidbody2D>();
@@ -59,7 +64,14 @@ public class Player_Controller : MonoBehaviour
             direction = 1;
         }
 
-        player_rb.velocity = new Vector2(direction * (speed * speed_multi), player_rb.velocity.y);
+        if (canMove)
+        {
+            player_rb.velocity = new Vector2(direction * (speed * speed_multi), player_rb.velocity.y);
+        }
+        else
+        {
+            player_rb.velocity = Vector2.zero;
+        }
     }
 
     private void handle_jump()
@@ -68,7 +80,15 @@ public class Player_Controller : MonoBehaviour
         if (is_Touching(Vector2.down))
         {
             speed_multi = 1;
-            coyote_timer = coyote_lenght;
+
+            if (canJump)
+            {
+                coyote_timer = coyote_lenght;
+            }
+            else
+            {
+                coyote_timer = 0;
+            }
         }
         else
         {
