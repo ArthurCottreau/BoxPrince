@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d2427916ef577f04186c8a84ca1ba856, type: 3}
-  m_Name: DefaultPlatform2
+  m_Name: IcePlatform
   m_EditorClassIdentifier: 
-  id: 1
-  icon: {fileID: 21300000, guid: 1ac21d0bf4554c14698c6cb7ef6f32ad, type: 3}
-  prefab: {fileID: 1831671169348871179, guid: ad1195f8da060834ebe0a71f67e16e41, type: 3}
+  id: 2
+  icon: {fileID: 21300000, guid: 85ff1ec1b3944bb45a57ddd5f7ffb275, type: 3}
+  prefab: {fileID: 1284212684062199940, guid: 0d133897bf262ce4d9bdc3a1f9f11fad, type: 3}
   decayTime: 10
   decayCollision: 1
   decayMultiplier: 1

@@ -28,6 +28,11 @@ public class Player_Controller : MonoBehaviour
     private bool press_jump = false;
     private bool pressing_jump = false;
 
+    // booléens permettant de contrôller le déplacement, le saut, et la mort, modifiés dans Player_Interaction.cs
+    public bool canJump = true;
+    public bool canMove = true;
+    public bool isDead = false;
+
     void Start()
     {
         player_rb = GetComponent<Rigidbody2D>();
@@ -42,8 +47,11 @@ public class Player_Controller : MonoBehaviour
 
     void FixedUpdate()
     {
-        handle_movement();
-        handle_jump();
+        if (isDead == false)
+        {
+            handle_movement();
+            handle_jump();
+        }
     }
 
     private void handle_movement()
@@ -59,7 +67,8 @@ public class Player_Controller : MonoBehaviour
             direction = 1;
         }
 
-        player_rb.velocity = new Vector2(direction * (speed * speed_multi), player_rb.velocity.y);
+        if (canMove) player_rb.velocity = new Vector2(direction * (speed * speed_multi), player_rb.velocity.y);
+        else player_rb.velocity = Vector2.zero;
     }
 
     private void handle_jump()
@@ -83,37 +92,40 @@ public class Player_Controller : MonoBehaviour
         }
 
         // Vérifie si le joueur peut sauter
-        if(jbuffer_timer > 0)
+        if (canJump)
         {
-            jbuffer_timer -= Time.deltaTime;
-
-            if (coyote_timer > 0)
+            if (jbuffer_timer > 0)
             {
-                is_jumping = true;
-                jump_timer = jump_length;
-                speed_multi = 1.65f;
-                coyote_timer = 0; 
+                jbuffer_timer -= Time.deltaTime;
+
+                if (coyote_timer > 0)
+                {
+                    is_jumping = true;
+                    jump_timer = jump_length;
+                    speed_multi = 1.65f;
+                    coyote_timer = 0;
+                }
+            }
+            if (is_jumping)
+            {
+                // Applique la physique du saut lors de la durée du 'jump_timer'
+                if (jump_timer > 0)
+                {
+                    player_rb.velocity = new Vector2(player_rb.velocity.x, jump_force);
+                }
+
+                jump_timer -= Time.deltaTime;
+
+                // Si le joueur lache la touche saut ou touche le plafond
+                if (!pressing_jump || is_Touching(Vector2.up))
+                {
+                    is_jumping = false;
+                    jump_timer = 0;
+                    speed_multi = 1;
+                }
             }
         }
 
-        if (is_jumping)
-        {
-            // Applique la physique du saut lors de la durée du 'jump_timer'
-            if (jump_timer > 0)
-            {
-                player_rb.velocity = new Vector2(player_rb.velocity.x, jump_force);
-            }
-
-            jump_timer -= Time.deltaTime;
-
-            // Si le joueur lache la touche saut ou touche le plafond
-            if (!pressing_jump || is_Touching(Vector2.up))
-            {
-                is_jumping = false;
-                jump_timer = 0;
-                speed_multi = 1;
-            }
-        }
     }
 
     private bool is_Touching(Vector2 direction)
