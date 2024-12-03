@@ -4,7 +4,7 @@ using UnityEngine;
 public class Player_Controller : MonoBehaviour
 {
     // Variables liées aux stats du joueur
-    [SerializeField] private float speed;   // Vitesse de déplacement
+    [SerializeField] public float speed;   // Vitesse de déplacement
     [SerializeField] private float jump_force;  // Puissance du saut
     [SerializeField] private float jump_length; // Durée du saut
     [SerializeField] private float jbuffer_length;  // Durée avant d'avoir touché le sol, où le saut est toujours considéré valide

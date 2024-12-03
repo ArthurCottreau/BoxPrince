@@ -144,6 +144,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3111181087026039592, guid: c9bae9ee639c0da468d73c8a909e7956, type: 3}
+      propertyPath: slideSpeed
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7343088702854374586, guid: c9bae9ee639c0da468d73c8a909e7956, type: 3}
       propertyPath: m_Name
       value: Ice

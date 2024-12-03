@@ -148,3 +148,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   newMove: 1
   newJump: 0
+  slideSpeed: 6

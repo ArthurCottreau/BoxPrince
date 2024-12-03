@@ -9,7 +9,7 @@ public class Level_Generation : MonoBehaviour
 
     private List<GameObject> ch_list = new List<GameObject>();
     private Transform cam_pos;
-    private Vector3 create_pos;
+    private Vector3 create_pos = new Vector3(0,2.0f,0);
     private int rand_range;
 
     private int chunk_size = 20;
