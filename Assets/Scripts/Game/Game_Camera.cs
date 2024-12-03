@@ -26,15 +26,10 @@ public class Player_Camera : MonoBehaviour
 
             if (target.transform.position.y < gameObject.transform.position.y - 10.5f)
             {
-                Death();
+                target.GetComponent<Player_Controller>().isDead = true;
+                willFollow = false;
+                GameObject.Find("CanvasUI").GetComponent<GameOver>().Death();
             }
         }
-    }
-
-    public void Death() //la fonction fait pas grand chose pour l'instant.
-    {
-        Debug.Log("You are dead! Not big suprise!");
-        target.GetComponent<Player_Controller>().isDead = true;
-        willFollow = false;
     }
 }

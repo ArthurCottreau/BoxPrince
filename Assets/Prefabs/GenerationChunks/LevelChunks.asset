@@ -15,3 +15,4 @@ MonoBehaviour:
   Chunks:
   - {fileID: 3449525309229505102, guid: 8d8265730c4689a489b3d4afeb411769, type: 3}
   - {fileID: 5791567947570166660, guid: c1c459db9923bb740b33f4d8226620d7, type: 3}
+  - {fileID: 3449525309229505102, guid: 70c173dbe9c83c841b96db2cef3d756f, type: 3}
