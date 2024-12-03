@@ -47,8 +47,11 @@ public class Player_Controller : MonoBehaviour
 
     void FixedUpdate()
     {
-        handle_movement();
-        handle_jump();
+        if (!isDead)
+        {
+            handle_movement();
+            handle_jump();
+        }
     }
 
     private void handle_movement()
