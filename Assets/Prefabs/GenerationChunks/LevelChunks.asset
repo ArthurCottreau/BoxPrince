@@ -13,5 +13,9 @@ MonoBehaviour:
   m_Name: LevelChunks
   m_EditorClassIdentifier: 
   Chunks:
-  - {fileID: 3449525309229505102, guid: 8d8265730c4689a489b3d4afeb411769, type: 3}
   - {fileID: 5791567947570166660, guid: c1c459db9923bb740b33f4d8226620d7, type: 3}
+  - {fileID: 5791567947570166660, guid: 919c17bf1c659d64e9b1238e0f736cd8, type: 3}
+  - {fileID: 3449525309229505102, guid: 88780d57d81702049ba8b3b3de828795, type: 3}
+  - {fileID: 3449525309229505102, guid: ce4b9f0c94bf6da489ec4aff8a119f93, type: 3}
+  - {fileID: 3449525309229505102, guid: a81481f06821b1c47bd0e383271040b9, type: 3}
+  - {fileID: 3449525309229505102, guid: 5ef3fd96f46d57b4c8a685a12b9f9832, type: 3}

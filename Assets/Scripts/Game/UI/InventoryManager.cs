@@ -116,7 +116,7 @@ public class InventoryManager : MonoBehaviour
     {
         currentTime = 0;
         fill.fillAmount = 0;
-        NewBlock();
+        InvDisplay();
     }
 
     private void Update()

@@ -6,6 +6,7 @@ public class Player_Interactions : MonoBehaviour
 {
     [SerializeField] private bool newMove;
     [SerializeField] private bool newJump;
+    [SerializeField] private float slideSpeed = 3;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -16,6 +17,7 @@ public class Player_Interactions : MonoBehaviour
 
             control.canMove = newMove;
             control.canJump = newJump;
+            control.speed = slideSpeed;
         }
     }
 
@@ -28,6 +30,7 @@ public class Player_Interactions : MonoBehaviour
 
             control.canMove = true;
             control.canJump = true;
+            control.speed = 3;
         }
     }
 }
