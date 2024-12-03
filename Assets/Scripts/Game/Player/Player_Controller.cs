@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class Player_Controller : MonoBehaviour
 {
@@ -51,6 +52,10 @@ public class Player_Controller : MonoBehaviour
         {
             handle_movement();
             handle_jump();
+        }
+        else
+        {
+            player_rb.velocity = Vector2.zero;
         }
     }
 
@@ -137,6 +142,12 @@ public class Player_Controller : MonoBehaviour
                 speed_multi = 1;
             }
         }
+    }
+
+    public void Death()
+    {
+        Debug.Log("You are dead! Not big suprise!");
+        isDead = true;
     }
 
     private bool is_Touching(Vector2 direction)

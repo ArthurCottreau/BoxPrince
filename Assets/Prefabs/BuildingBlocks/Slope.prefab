@@ -130,9 +130,9 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.5, y: 0.6}
-      - {x: 0.5, y: -0.5}
-      - {x: -0.6, y: -0.5}
+    - - {x: 0.3, y: 0.4}
+      - {x: 0.3, y: -0.3}
+      - {x: -0.4, y: -0.3}
   m_UseDelaunayMesh: 0
 --- !u!114 &8379846841327607947
 MonoBehaviour:
@@ -148,3 +148,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   newMove: 1
   newJump: 0
+  slideSpeed: 6
+  willKill: 0

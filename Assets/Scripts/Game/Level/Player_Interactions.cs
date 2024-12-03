@@ -7,6 +7,7 @@ public class Player_Interactions : MonoBehaviour
     [SerializeField] private bool newMove;
     [SerializeField] private bool newJump;
     [SerializeField] private float slideSpeed = 3;
+    [SerializeField] private bool willKill = false;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -14,10 +15,16 @@ public class Player_Interactions : MonoBehaviour
         if (collision.name == "Player")
         {
             Player_Controller control = collision.gameObject.GetComponent<Player_Controller>();
-
-            control.canMove = newMove;
-            control.canJump = newJump;
-            control.speed = slideSpeed;
+            if (!willKill)
+            {
+                control.canMove = newMove;
+                control.canJump = newJump;
+                control.speed = slideSpeed;
+            }
+            else
+            {
+                control.Death();
+            }
         }
     }
 
