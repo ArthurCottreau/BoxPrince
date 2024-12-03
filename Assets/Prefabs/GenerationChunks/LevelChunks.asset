@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: LevelChunks
   m_EditorClassIdentifier: 
   Chunks:
-  - {fileID: 5791567947570166660, guid: c1c459db9923bb740b33f4d8226620d7, type: 3}
   - {fileID: 5791567947570166660, guid: 919c17bf1c659d64e9b1238e0f736cd8, type: 3}
   - {fileID: 3449525309229505102, guid: 88780d57d81702049ba8b3b3de828795, type: 3}
   - {fileID: 3449525309229505102, guid: ce4b9f0c94bf6da489ec4aff8a119f93, type: 3}

@@ -78,6 +78,7 @@ public class InventoryManager : MonoBehaviour
             if (size > i)
             {
                 inv_slots[i].sprite = inventory[i].icon;
+                inv_slots[i].color = Color.white;
             }
         }
     }
@@ -90,6 +91,7 @@ public class InventoryManager : MonoBehaviour
         {
             PlatformScript platform = inventory[0];
 
+            inv_slots[size].color = Color.clear;
             inv_slots[size].sprite = null;
             ClearActiveSlot();
             InvDisplay();
