@@ -146,8 +146,8 @@ public class Player_Controller : MonoBehaviour
 
     public void Death()
     {
-        Debug.Log("You are dead! Not big suprise!");
         isDead = true;
+        GameObject.Find("CanvasUI").GetComponent<GameOver>().Death();
     }
 
     private bool is_Touching(Vector2 direction)
