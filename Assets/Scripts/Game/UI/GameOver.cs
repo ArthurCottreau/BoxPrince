@@ -12,18 +12,24 @@ public class GameOver : MonoBehaviour
     [SerializeField] private GameObject goui; // goui moment                                            (Game Over User Interface)
     [SerializeField] private TMP_Text display_score;
     [SerializeField] private TMP_Text display_height;
+    [SerializeField] private ScoreManager scoreManager;
 
     private float finalScore;
     private float finalHeight;
 
-    public void Death() // public pour être appelée par la Camera et les piques
+    public void Death() // public pour être appelée par des objets externes
     {
         Debug.Log("You are dead! Not big suprise!");
+
+        // Récupère le score puis l'affiche sur l'UI GameOver
         finalScore = Mathf.Round(manager.GetScore());
         finalHeight = Mathf.Round(manager.GetHeight() * 100f) / 100f;
         display_score.text = ("Score : " + finalScore);
         display_height.text = ("Hauteur : " + finalHeight + "m");
         goui.SetActive(true);
+
+        // Sauvegarde le Score
+        scoreManager.newScore((int)finalScore, finalHeight);
     }
     public float GetFinalScore()
     {

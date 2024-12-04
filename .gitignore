@@ -72,3 +72,5 @@ crashlytics-build.properties
 
 # Unity Package Bloat
 /[Aa]ssets/TextMesh*Pro
+/[Aa]ssets/savescore.json
+/[Aa]ssets/savescore.json.meta
