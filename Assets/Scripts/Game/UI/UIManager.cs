@@ -30,6 +30,8 @@ public class UIManager : MonoBehaviour
     }
     void Start()
     {
+        GameManager gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        textRecord.text = "Record : " + gameManager.highScore;
         score = 0;
     }
 
@@ -49,5 +51,14 @@ public class UIManager : MonoBehaviour
         score -= scoreDecrease * Time.deltaTime; // chute du score avec le temps
         if (score < 0) score = 0; // pas de score négatif !
         textScore.text = "Score : " + Mathf.Round(score); // affichage du score, sans décimal
+    }
+
+    public void update_hscore(float newscore)
+    {
+        GameManager gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        if (newscore > gameManager.highScore)
+        {
+            gameManager.highScore = newscore;
+        }
     }
 }
