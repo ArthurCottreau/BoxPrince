@@ -12,15 +12,13 @@ public class GameOver : MonoBehaviour
     [SerializeField] private GameObject goui; // goui moment                                            (Game Over User Interface)
     [SerializeField] private TMP_Text display_score;
     [SerializeField] private TMP_Text display_height;
-    [SerializeField] private ScoreManager scoreManager;
+    private ScoreManager scoreManager;
 
     private float finalScore;
     private float finalHeight;
 
     public void Death() // public pour être appelée par des objets externes
     {
-        Debug.Log("You are dead! Not big suprise!");
-
         // Récupère le score puis l'affiche sur l'UI GameOver
         finalScore = Mathf.Round(manager.GetScore());
         finalHeight = Mathf.Round(manager.GetHeight() * 100f) / 100f;
@@ -30,6 +28,8 @@ public class GameOver : MonoBehaviour
 
         // Sauvegarde le Score
         scoreManager.newScore((int)finalScore, finalHeight);
+
+        manager.update_hscore(finalScore);
     }
     public float GetFinalScore()
     {
@@ -50,5 +50,9 @@ public class GameOver : MonoBehaviour
     public void MainMenu()
     {
         SceneManager.LoadScene(0);
+    }
+    private void Start()
+    {
+        scoreManager = GameObject.Find("GameManager").GetComponent<ScoreManager>();
     }
 }
