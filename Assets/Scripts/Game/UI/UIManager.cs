@@ -38,8 +38,8 @@ public class UIManager : MonoBehaviour
     void Update()
     {
         // calcul et affichage de la hauteur du joueur, à 2 décimales près
-        height = Mathf.Round(player.transform.position.y * 100f) / 100f;
-        textHeight.text = "Hauteur : " + height + "m";
+        height = player.transform.position.y;
+        textHeight.text = "Hauteur : " + height.ToString("0.00") + "m";
 
         if (height > maxHeight) // check si hauteur max atteinte dépassée, pour gain de score
         {
@@ -50,6 +50,7 @@ public class UIManager : MonoBehaviour
 
         score -= scoreDecrease * Time.deltaTime; // chute du score avec le temps
         if (score < 0) score = 0; // pas de score négatif !
+
         textScore.text = "Score : " + Mathf.Round(score); // affichage du score, sans décimal
     }
 

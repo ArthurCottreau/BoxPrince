@@ -4,6 +4,7 @@ using System.Net.Http.Headers;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms.Impl;
 using static UnityEngine.GraphicsBuffer;
 
 public class GameOver : MonoBehaviour
@@ -14,24 +15,30 @@ public class GameOver : MonoBehaviour
     [SerializeField] private TMP_Text display_height;
     private ScoreManager scoreManager;
 
-    private float finalScore;
+    private int finalScore;
     private float finalHeight;
+
+    private void Start()
+    {
+        scoreManager = GameObject.Find("GameManager").GetComponent<ScoreManager>();
+    }
 
     public void Death() // public pour être appelée par des objets externes
     {
         // Récupère le score puis l'affiche sur l'UI GameOver
-        finalScore = Mathf.Round(manager.GetScore());
-        finalHeight = Mathf.Round(manager.GetHeight() * 100f) / 100f;
-        display_score.text = ("Score : " + finalScore);
-        display_height.text = ("Hauteur : " + finalHeight + "m");
+        finalScore = Mathf.RoundToInt(manager.GetScore());
+        finalHeight = manager.GetHeight();
+        display_score.text = "Score : " + finalScore;
+        display_height.text = "Hauteur : " + finalHeight.ToString("0.00") + "m";
         goui.SetActive(true);
 
         // Sauvegarde le Score
-        scoreManager.newScore((int)finalScore, finalHeight);
+        scoreManager.newScore(finalScore, finalHeight);
 
+        // Met à jour le highscore dans le GameManager
         manager.update_hscore(finalScore);
     }
-    public float GetFinalScore()
+    public int GetFinalScore()
     {
         return finalScore;
     }
@@ -43,16 +50,9 @@ public class GameOver : MonoBehaviour
         }
         return finalHeight;
     }
-    public void Retry()
+
+    public void nextScene(int scene)
     {
-        SceneManager.LoadScene(1);
-    }
-    public void MainMenu()
-    {
-        SceneManager.LoadScene(0);
-    }
-    private void Start()
-    {
-        scoreManager = GameObject.Find("GameManager").GetComponent<ScoreManager>();
+        SceneManager.LoadScene(scene);
     }
 }
