@@ -10,11 +10,13 @@ public class Parrallax_Scrolling : MonoBehaviour
     private Transform cam_pos;
     private float start_pos;
     private float height;
+    private float xoffset;
 
     void Start()
     {
         cam_pos = Camera.main.transform;
         start_pos = transform.position.y;
+        xoffset = transform.position.x;
         height = GetComponent<SpriteRenderer>().bounds.size.y / 2;
 
         move_layer();
@@ -29,7 +31,7 @@ public class Parrallax_Scrolling : MonoBehaviour
     void move_layer()
     {
         float new_pos = cam_pos.position.y * scroll_speed;
-        transform.position = new Vector3(0, start_pos + new_pos, 0);
+        transform.position = new Vector3(xoffset, start_pos + new_pos, 0);
     }
 
     void loop_layer()

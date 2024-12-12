@@ -16,6 +16,8 @@ public class Player_Controller : MonoBehaviour
     private Rigidbody2D player_rb;
     private BoxCollider2D player_coll;
     private ItemController last_touched;
+    private Animator player_anim;
+    private SpriteRenderer player_sprite;
 
     // Variables qui servent à gérer le saut
     private bool is_jumping = false;
@@ -38,6 +40,8 @@ public class Player_Controller : MonoBehaviour
     {
         player_rb = GetComponent<Rigidbody2D>();
         player_coll = GetComponent<BoxCollider2D>();
+        player_anim = GetComponent<Animator>();
+        player_sprite = GetComponent<SpriteRenderer>();
     }
 
     void Update()
@@ -65,20 +69,24 @@ public class Player_Controller : MonoBehaviour
         if (is_Touching(Vector2.right))
         {
             direction = -1;
+            player_sprite.flipX = true;
         }
 
         if (is_Touching(Vector2.left))
         {
             direction = 1;
+            player_sprite.flipX = false;
         }
 
         if (canMove)
         {
             player_rb.velocity = new Vector2(direction * (speed * speed_multi), player_rb.velocity.y);
+            player_anim.SetBool("isRunning", true);
         }
         else
         {
             player_rb.velocity = Vector2.zero;
+            player_anim.SetBool("isRunning", false);
         }
     }
 
@@ -87,6 +95,8 @@ public class Player_Controller : MonoBehaviour
         // Si le joueur touche le sol
         if (is_Touching(Vector2.down))
         {
+            player_anim.SetBool("isGrounded", true);
+
             speed_multi = 1;
 
             if (canJump)
@@ -100,6 +110,17 @@ public class Player_Controller : MonoBehaviour
         }
         else
         {
+            player_anim.SetBool("isGrounded", false);
+
+            if (player_rb.velocity.y > 0)
+            {
+                player_anim.SetTrigger("Jump");
+            }
+            else
+            {
+                player_anim.SetTrigger("Falling");
+            }
+
             coyote_timer -= Time.deltaTime;
         }
 
@@ -120,7 +141,7 @@ public class Player_Controller : MonoBehaviour
                 is_jumping = true;
                 jump_timer = jump_length;
                 speed_multi = 1.65f;
-                coyote_timer = 0; 
+                coyote_timer = 0;
             }
         }
 
