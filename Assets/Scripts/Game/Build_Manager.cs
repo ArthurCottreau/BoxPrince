@@ -16,12 +16,21 @@ public class Build_Manager : MonoBehaviour
     private PlatformScript select_obj;
     private bool can_build = true;
 
+    // partie audio
+    private AudioSource sfx;
+    [SerializeField] private AudioClip audioPlace;
+    [SerializeField] private AudioClip audioPlaceFail;
+
     private void Start()
     {
         sprite_rend = gameObject.GetComponent<SpriteRenderer>();
         default_sprite = sprite_rend.sprite;
         inv_manag = gameObject.GetComponent<InventoryManager>();
         poly_col = gameObject.GetComponent<PolygonCollider2D>();
+
+        //partie audio
+        sfx = gameObject.GetComponent<AudioSource>();
+        sfx.volume = GameObject.Find("GameManager").GetComponent<GameManager>().sfxVolume / 100 / GameObject.Find("GameManager").GetComponent<GameManager>().sfxOffset;
     }
 
     void Update()
@@ -55,15 +64,25 @@ public class Build_Manager : MonoBehaviour
     private void handleBuilding(Vector2 pos)
     {
         // Si le joueur click, récupère l'objet dans l'emplacement actif de l'inventaire et le place à la position de la souris
-        if (can_build && Input.GetMouseButtonDown(0))
-        {
-            select_obj = inv_manag.GetActiveSlot();
-
-            if (select_obj)
+        if (Input.GetMouseButtonDown(0))
+            if (can_build)
             {
-                Instantiate(select_obj.prefab, pos, Quaternion.identity, level_layer);
+                {
+                    select_obj = inv_manag.GetActiveSlot();
+
+                    if (select_obj)
+                        {
+                            sfx.clip = audioPlace;
+                            sfx.Play();
+                            Instantiate(select_obj.prefab, pos, Quaternion.identity, level_layer);
+                        }
+                }
             }
-        }
+            else
+            {
+                sfx.clip = audioPlaceFail;
+                sfx.Play();
+            }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

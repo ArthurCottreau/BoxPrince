@@ -23,11 +23,19 @@ public class InventoryManager : MonoBehaviour
     public List<PlatformScript> inventory;                      // array inventaire, 0 étant la main du joueur, limité à 4 slots plus tard
     private PlatformScript temp;                                // variable temp pour switch
 
+    // partie audio
+    private AudioSource sfx;
+    [SerializeField] private AudioClip audioBlockNew;
+    [SerializeField] private AudioClip audioBlockSwap;
+    [SerializeField] private AudioClip audioBlockDeny;
+
     public void NewBlock()
     {
         int rnd = Random.Range(0, platformsList.Count);         // tire un nombre aléatoire entre 0 et la taille de la liste des plateformes
         inventory.Add(platformsList[rnd]);                      // ajoute à l'inventaire la plateforme correspondante
         InvDisplay();
+        sfx.clip = audioBlockNew;
+        sfx.Play();
     }
     
     // pour une raison ou une autre, les bouttons refusent d'appeler des fonctions demandants une entrée.
@@ -40,8 +48,15 @@ public class InventoryManager : MonoBehaviour
             inventory[inv_slot] = inventory[0];
             inventory[0] = temp;
             InvDisplay();
+            sfx.clip = audioBlockSwap;
+            sfx.Play();
         }
-        else Debug.LogWarning("Attention : Le slot d\'inventaire " + inv_slot + " est vide.");
+        else
+        {
+            Debug.LogWarning("Attention : Le slot d\'inventaire " + inv_slot + " est vide.");
+            sfx.clip = audioBlockDeny;
+            sfx.Play();
+        }
     }
 
     private void multiply_speed()
@@ -116,9 +131,11 @@ public class InventoryManager : MonoBehaviour
 
     private void Start()
     {
+        sfx = gameObject.GetComponent<AudioSource>();
         currentTime = 0;
         fill.fillAmount = 0;
         InvDisplay();
+        sfx.volume = GameObject.Find("GameManager").GetComponent<GameManager>().sfxVolume / 100 / GameObject.Find("GameManager").GetComponent<GameManager>().sfxOffset;
     }
 
     private void Update()

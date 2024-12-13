@@ -18,10 +18,10 @@ public class CrownController : MonoBehaviour
     void Update()
     {
         // Met en place une variable qui ne modifie pas la position de la couronne
-        // et laisse la graviter du rigidbody
+        // et laisse la gravité du rigidbody
         float targetyPosition = transform.position.y;
 
-        // Qui est modifier si le joueur est en train de tomber
+        // Qui est modifiée si le joueur est en train de tomber
         if (transform.position.y <= player.position.y + hoverDistance)
         {
             rb.velocity = Vector2.zero; // Annule tout déplacement lié au rigidbody de la courrone
