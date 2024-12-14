@@ -14,11 +14,10 @@ public class LeaderboardManager : MonoBehaviour
     {
         GameManager gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         ScoreManager scoreManager = GameObject.Find("GameManager").GetComponent<ScoreManager>();
-
         ScoreData data = scoreManager.getScores();
 
         data.scoreList = data.scoreList.OrderByDescending(go => go.scoreJoueur).ToList<ElementScore>();
-        
+
         // Vérifie si la liste est vide, si elle n'est pas créais les éléments du leaderboard
         if (data.scoreList.Count > 0)
         {

@@ -36,12 +36,22 @@ public class Player_Controller : MonoBehaviour
     public bool canMove = true;
     public bool isDead = false;
 
+    // partie audio
+    private AudioSource sfx;
+    [SerializeField] private AudioClip audioJump;
+    /* [SerializeField] private AudioClip audioHit; -- faut croire que nos collisions de hit sont un peu trop spicy pour ça. */
+    [SerializeField] private AudioClip audioLose;
+
     void Start()
     {
         player_rb = GetComponent<Rigidbody2D>();
         player_coll = GetComponent<BoxCollider2D>();
         player_anim = GetComponent<Animator>();
         player_sprite = GetComponent<SpriteRenderer>();
+
+        // audio
+        sfx = gameObject.GetComponent<AudioSource>();
+        sfx.volume = GameObject.Find("GameManager").GetComponent<GameManager>().sfxVolume / GameObject.Find("GameManager").GetComponent<GameManager>().sfxOffset;
     }
 
     void Update()
@@ -68,12 +78,23 @@ public class Player_Controller : MonoBehaviour
         // Test la direction du joueur
         if (is_Touching(Vector2.right))
         {
+            /*if (!sfx.isPlaying)
+            {
+                sfx.clip = audioHit;
+                sfx.Play();
+            }*/
             direction = -1;
             player_sprite.flipX = true;
         }
 
         if (is_Touching(Vector2.left))
         {
+            /*if (!sfx.isPlaying)
+            {
+                sfx.clip = audioHit;
+                sfx.Play();
+            }
+            */
             direction = 1;
             player_sprite.flipX = false;
         }
@@ -138,6 +159,8 @@ public class Player_Controller : MonoBehaviour
 
             if (coyote_timer > 0)
             {
+                sfx.clip = audioJump;
+                sfx.Play();
                 is_jumping = true;
                 jump_timer = jump_length;
                 speed_multi = 1.65f;
@@ -168,6 +191,8 @@ public class Player_Controller : MonoBehaviour
     public void Death()
     {
         isDead = true;
+        sfx.clip = audioLose;
+        sfx.Play();
         GameObject.Find("CanvasUI").GetComponent<GameOver>().Death();
     }
 

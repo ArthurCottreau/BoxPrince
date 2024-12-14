@@ -18,9 +18,15 @@ public class GameOver : MonoBehaviour
     private int finalScore;
     private float finalHeight;
 
+    // partie audio
+    private AudioSource sfx;
+    [SerializeField] private AudioClip audioLose;
+
     private void Start()
     {
         scoreManager = GameObject.Find("GameManager").GetComponent<ScoreManager>();
+        sfx = gameObject.GetComponent<AudioSource>();
+        sfx.volume = GameObject.Find("GameManager").GetComponent<GameManager>().sfxVolume / GameObject.Find("GameManager").GetComponent<GameManager>().sfxOffset;
     }
 
     public void Death() // public pour être appelée par des objets externes
@@ -31,7 +37,9 @@ public class GameOver : MonoBehaviour
         display_score.text = "Score : " + finalScore;
         display_height.text = "Hauteur : " + finalHeight.ToString("0.00") + "m";
         goui.SetActive(true);
-
+        sfx.clip = audioLose;
+        sfx.Play();
+        GameObject.Find("GameManager").GetComponent<AudioSource>().volume /= 3;
         // Sauvegarde le Score
         scoreManager.newScore(finalScore, finalHeight);
 
@@ -53,6 +61,7 @@ public class GameOver : MonoBehaviour
 
     public void nextScene(int scene)
     {
+        if (scene == 1) GameObject.Find("GameManager").GetComponent<AudioSource>().volume *= 3;
         SceneManager.LoadScene(scene);
     }
 }
